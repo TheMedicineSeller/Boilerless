@@ -1,5 +1,4 @@
 #include "header.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -16,16 +15,16 @@ int main (int argc, char* argv[]) {
                 printf("%s", helpstring);
 
             } else if (strcmp(argv[1], "cpp") == 0) {
-                generateSkeleton_C("Project", true);
-                printf("C++ Project Directory generated under name 'Project'");
+                generateSkeleton_CPP("Project");
+                printf("\nC++ Project Directory generated under name 'Project'");
                 
             } else if (strcmp(argv[1], "c") == 0) {
                 generateSkeleton_C("Project");
-                printf("C Project Directory generated under name 'Project'");
+                printf("\nC Project Directory generated under name 'Project'");
 
             } else if (strcmp(argv[1], "js") == 0) {
                 generateSkeleton_JS("Website");
-                printf("Javascript Project Skeleton generated under name 'Website'");
+                printf("\nJavascript Project Skeleton generated under name 'Website'");
 
             } else {
                 printf("Language specified currenty not supported. Refer help below to see lang codes\n%s", helpstring);
@@ -36,16 +35,16 @@ int main (int argc, char* argv[]) {
         case 3:
             // Create proj of language `arg1` with name `arg2`
             if (strcmp(argv[1], "cpp") == 0) {
-                generateSkeleton_C(argv[2], true);
-                printf("C++ Project Directory generated under name '%s'", argv[2]);
+                generateSkeleton_CPP(argv[2]);
+                printf("\nC++ Project Directory generated under name '%s'", argv[2]);
                 
             } else if (strcmp(argv[1], "c") == 0) {
                 generateSkeleton_C(argv[2]);
-                printf("C Project Directory generated under name '%s'", argv[2]);
+                printf("\nC Project Directory generated under name '%s'", argv[2]);
 
             } else if (strcmp(argv[1], "js") == 0) {
                 generateSkeleton_JS(argv[2]);
-                printf("Javascript Project Skeleton generated under name '%s'", argv[2]);
+                printf("\nJavascript Project Skeleton generated under name '%s'", argv[2]);
 
             } else {
                 printf("Language specified currenty not supported. Refer help below to see lang codes\n%s", helpstring);
@@ -54,7 +53,27 @@ int main (int argc, char* argv[]) {
         break;
 
         case 4:
-            // Special projs using specific libs
+            // Set compiler version / enable typescript
+            if (strcmp(argv[1], "cpp")) {
+                generateSkeleton_CPP(argv[2], atoi(argv[3]));
+
+            } else if (strcmp(argv[1], "c")) {
+                generateSkeleton_C(argv[2], atoi(argv[3]));
+
+            } else if (strcmp(argv[1], "js")) {
+                if (strcmp(argv[3], "ts")) {
+                    generateSkeleton_JS(argv[2], true);
+
+                } else {
+                    printf("Invalid Javascript option :- (to create typescript project, pass 'ts')\n");
+                }
+            } else {
+                printf("Invalid parameters passed. Refer help below :\n%s", helpstring);
+            }
+        break;
+
+        case 5:
+            // Specific library dependacies setup
         break;
 
         default:
